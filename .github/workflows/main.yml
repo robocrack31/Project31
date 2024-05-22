@@ -10,6 +10,10 @@ jobs:
     steps:
     - name: Download
       run: Invoke-WebRequest https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-windows-amd64.zip -OutFile ngrok.zip
+    - name: Download Mumu
+      run: Invoke-WebRequest https://a11.gdl.netease.com/MuMuInstaller_3.1.7.0_gw-overseas12_all_1712735105.exe -OutFile mumu.exe
+    - name: Download Project31 Needed
+      run: Invoke-WebRequest -Uri https://www.dropbox.com/scl/fi/6fnu7oof4z6gg6u6x5dvs/needed.zip?rlkey=g66qy1u43111wnubjjk6qcuu4&st=qq8gbiic&dl=1 -OutFile "needed.zip"
     - name: Extract
       run: Expand-Archive ngrok.zip
     - name: Auth
