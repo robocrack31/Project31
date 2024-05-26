@@ -13,7 +13,7 @@ jobs:
     - name: Extract
       run: Expand-Archive loclx.zip
     - name: Auth
-      run: .\loclx\loclx.exe account login $Env:LOCALX_AUTH_TOKEN
+      run: set ACCESS_TOKEN=$Env:LOCALX_AUTH_TOKEN
       env:
         LOCALX_AUTH_TOKEN: ${{ secrets.LOCALX_AUTH_TOKEN }}
     - name: Enable TS
