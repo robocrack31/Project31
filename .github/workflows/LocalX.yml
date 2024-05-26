@@ -12,10 +12,6 @@ jobs:
       run: Invoke-WebRequest https://loclx-client.s3.amazonaws.com/loclx-windows-amd64.zip -OutFile loclx.zip
     - name: Extract
       run: Expand-Archive loclx.zip
-    - name: Auth
-      run: set ACCESS_TOKEN=$Env:LOCALX_AUTH_TOKEN
-      env:
-        LOCALX_AUTH_TOKEN: ${{ secrets.LOCALX_AUTH_TOKEN }}
     - name: Enable TS
       run: Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server'-name "fDenyTSConnections" -Value 0
     - run: Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
@@ -23,3 +19,5 @@ jobs:
     - run: Set-LocalUser -Name "runneradmin" -Password (ConvertTo-SecureString -AsPlainText "P@ssw0rd!" -Force)
     - name: Create Tunnel
       run: .\loclx\loclx.exe tunnel tcp --port 3389
+      env:
+        ACCESS_TOKEN: ${{ secrets.LOCALX_AUTH_TOKEN }}
